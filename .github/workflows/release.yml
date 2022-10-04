@@ -1,4 +1,4 @@
-# This is basically copies 1:1 from Topi - https://github.com/Topis-Lavalink-Plugins/Topis-Source-Managers-Plugin/blob/master/.github/workflows/release.yml
+# Most of this is copied from Topi - https://github.com/Topis-Lavalink-Plugins/Topis-Source-Managers-Plugin/blob/master/.github/workflows/release.yml
 
 name: Release
 on:
@@ -22,7 +22,9 @@ jobs:
 
             - name: Execute Gradle build
               run: ./gradlew shadowJar
-            - name: Release
-              uses: softprops/action-gh-release@v1
+
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
               with:
-                  files: build/libs/kaogurai-lavalink-plugin-*.jar
+                name: Lavalink.jar
+                path: build/libs/kaogurai-lavalink-plugin-*.jar
