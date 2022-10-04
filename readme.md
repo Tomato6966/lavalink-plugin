@@ -33,3 +33,6 @@ To load a track via search, use `dsearch:<QUERY>`, where `<QUERY>` is the search
 
 ### Load via ISRC
 This is the most reliable way to load a track, but it requires the ISRC code of the track. You also use the `dsearch:` prefix, but instead of a search query, you use the ISRC code, prefixed with `isrc:`. For example, `dsearch:isrc:USUM72000001` will load the track "Blinding Lights" by The Weeknd.
+
+## Credit
+Thank you to [topi](https://github.com/TopiSenpai) for guiding me through the Java Jungle and being super helpful, and for making his plugins and source managers that I used as a reference.

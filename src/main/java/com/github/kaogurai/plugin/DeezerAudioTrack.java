@@ -3,6 +3,7 @@ package com.github.kaogurai.plugin;
 import com.sedmelluq.discord.lavaplayer.track.DelegatedAudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.playback.LocalAudioTrackExecutor;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.tools.io.PersistentHttpStream;
 import com.sedmelluq.discord.lavaplayer.container.mp3.Mp3AudioTrack;
 import com.sedmelluq.discord.lavaplayer.tools.io.HttpInterface;
@@ -17,6 +18,11 @@ public class DeezerAudioTrack extends DelegatedAudioTrack {
         super(trackInfo);
         this.trackInfo = trackInfo;
         this.sourceManager = manager;
+    }
+
+    @Override
+	public AudioSourceManager getSourceManager(){
+		return this.sourceManager;
     }
 
     @Override

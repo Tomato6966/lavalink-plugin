@@ -84,9 +84,9 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
 
       JsonBrowser json = JsonBrowser.parse(r.getEntity().getContent());
 
-      String title = json.get("title").text();
+      String title = json.get("name").text();
       String artist = json.get("artist").get("name").text();
-      long length = json.get("duration").as(Long.class);
+      long length = json.get("duration").as(Long.class) * 1000;
       int id = json.get("id").as(Integer.class);
 
       return new DeezerAudioTrack(
@@ -116,12 +116,16 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
 
       var tracks = json.get("tracks").values();
 
+      if (tracks.size() == 0) {
+        return null;
+      }
+
       List<AudioTrack> playlistTracks = new ArrayList<>();
 
       for (var track : tracks) {
-        String title = track.get("title").text();
+        String title = track.get("name").text();
         String artist = track.get("artist").get("name").text();
-        long length = track.get("duration").as(Long.class);
+        long length = track.get("duration").as(Long.class) * 1000;
         String id = track.get("id").text();
 
         playlistTracks.add(new DeezerAudioTrack(
