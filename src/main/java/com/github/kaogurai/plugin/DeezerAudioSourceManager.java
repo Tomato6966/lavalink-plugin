@@ -28,8 +28,8 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
 
   private String DEEZER_SEARCH_PREFIX = "dsearch:";
   private String DEEZER_SEARCH_ISRC_PREFIX = "isrc:";
-  private String proxyURL;
-  private String authKey;
+  public String proxyURL;
+  public String authKey;
 
   public final HttpInterfaceManager httpInterfaceManager = HttpClientTools.createDefaultThreadLocalManager();
 
@@ -87,10 +87,10 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
       String title = json.get("name").text();
       String artist = json.get("artist").get("name").text();
       long length = json.get("duration").as(Long.class) * 1000;
-      int id = json.get("id").as(Integer.class);
+      String id = json.get("id").text();
 
       return new DeezerAudioTrack(
-          new AudioTrackInfo(title, artist, length, isrc, false, proxyURL + "/v1/track/download/" + id),
+          new AudioTrackInfo(title, artist, length, id, false, "https://deezer.com/track/" + id),
           this);
 
     } finally {
@@ -129,7 +129,7 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
         String id = track.get("id").text();
 
         playlistTracks.add(new DeezerAudioTrack(
-            new AudioTrackInfo(title, artist, length, id, false, proxyURL + "/v1/track/download/" + id),
+            new AudioTrackInfo(title, artist, length, id, false, "https://deezer.com/track/" + id),
             this));
       }
 

@@ -22,7 +22,7 @@ public class Plugin implements AudioPlayerManagerConfiguration {
     @Override
     public AudioPlayerManager configure(AudioPlayerManager manager) {
         if (sourcesConfig.isDeezer()) {
-            log.info("Enabling Deezer plugin");
+            log.info("Enabling Deezer source manager");
             manager.registerSourceManager(new DeezerAudioSourceManager(deezerPluginConfig.getProxyURL(), deezerPluginConfig.getAuthKey()));
         }
         return manager;

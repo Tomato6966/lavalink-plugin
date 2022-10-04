@@ -27,8 +27,12 @@ public class DeezerAudioTrack extends DelegatedAudioTrack {
 
     @Override
     public void process(LocalAudioTrackExecutor executor) throws Exception {
+
+        String trackId = trackInfo.uri.substring(25);
+        String downloadURL = this.sourceManager.proxyURL + "/v1/track/download/" + trackId;
+
         try (HttpInterface httpInterface = this.sourceManager.getHttpInterface()) {
-            try (PersistentHttpStream stream = new PersistentHttpStream(httpInterface, new URI(this.trackInfo.uri),
+            try (PersistentHttpStream stream = new PersistentHttpStream(httpInterface, new URI(downloadURL),
                     this.trackInfo.length)) {
                 processDelegate(new Mp3AudioTrack(this.trackInfo, stream), executor);
             }
