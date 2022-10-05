@@ -133,7 +133,7 @@ public class DeezerAudioSourceManager implements AudioSourceManager {
             this));
       }
 
-      return new BasicAudioPlaylist("Deezer Search: " + query, playlistTracks, null, false);
+      return new BasicAudioPlaylist("Deezer Search: " + query, playlistTracks, null, true);
 
     } finally {
       httpInterface.close();
